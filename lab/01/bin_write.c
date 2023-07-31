@@ -1,11 +1,8 @@
 #include <stdio.h>
-#include <string.h>
 
 int main(){
-    FILE  *fd;
-    char *cadena = "HOLA DESDE C";
-    char *filename = "archivo.txt";
-
+    FILE *fd;
+    char *filename = "number.dat";
     fd = fopen(filename, "w+");
     if (fd == NULL)
     {
@@ -13,14 +10,12 @@ int main(){
         return 1;
     }
     printf("Archivo %s abierto correctamente\n", filename);
-
-    int len = strlen(cadena);
+    int tam_int = sizeof(int);
     int i;
-    for (i = 0; i < len; i++)
+    for (i = 0; i < 10; i++)
     {
-        fputc(cadena[i], fd);
+        fwrite(&i, tam_int, 1, fd);
     }
-    fputc('\n', fd);
     printf("Datos escritos correctamente\n");
     fclose(fd);
     return 0;
