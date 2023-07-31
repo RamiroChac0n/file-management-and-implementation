@@ -50,4 +50,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-my_first_file.txt
+*.txt
