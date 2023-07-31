@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-add_Info(){
+void add_Info(){
     char nombre[100];
-    printf("Porfavor escriba el nombre del archivo a utulizar\n");
+    printf("Porfavor escriba el nombre del archivo a utilizar\n");
     fflush(stdin);
     fgets(nombre, 99, stdin);
     FILE *archivo = fopen(nombre, "a");

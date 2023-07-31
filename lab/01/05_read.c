@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void read_File(){
+int read_File(){
     char nombre[100], nombre2[100], letra = ' ';
     printf("Porfavor escriba el nombre del archivo a leer\n");
     fflush(stdin);
@@ -17,7 +17,7 @@ void read_File(){
             letra = fgetc(archivo);
             if (letra != -1)
             {
-                printf('%c', letra);
+                printf("%c", letra);
             }
             
         }
@@ -28,7 +28,6 @@ void read_File(){
 }
 
 int main(){
-    char nombre[100];
     read_File();
     return 0;
 }

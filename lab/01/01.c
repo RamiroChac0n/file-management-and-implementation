@@ -1,5 +1,5 @@
 #include <stdio.h>
-crear_Archivo(char nombre[100]){
+void crear_Archivo(){
     FILE *archivo= fopen("my_first_file.txt", "w");
     if (archivo == NULL)
     {
@@ -10,9 +10,6 @@ crear_Archivo(char nombre[100]){
 }
 
 int main(){
-    char nombre[100];
-    printf("Ingrese el nombre del archivo que desee crear\n");
-    fgets(nombre, 99, stdin);
-    crear_Archivo(nombre);
+    crear_Archivo();
     return 0;
 }
