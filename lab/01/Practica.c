@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 
-int create_file(char *name){
-    FILE *file;
-    file = fopen(name, "w");
+void create_file(char name[50]){
+    char filename[54];
+    strcpy(filename, name);
+    strcat(filename, ".txt");
+    FILE *file = fopen(filename, "w");
     if(file == NULL){
-        return 1;
+        printf("Error al crear el archivo\n");
+    }else{
+        printf("Archivo creado con exito\n");
     }
     fclose(file);
-    return 0;
 }
 
 int main(){
@@ -19,21 +22,16 @@ int main(){
         printf("1. Crear archivo\n");
         printf("0. Salir\n");
         printf("_________________________________________________\n");
-        printf("Opcion: ");
-        scanf("%d", &option);
+        printf("Opcion:\n");
+        scanf(" %d", &option);
         fflush(stdin);
         switch (option)
         {
         case 1:
             char name[50];
-            printf("Ingrese el nombre del archivo: \n");
-            scanf("%s", name);
-            fflush(stdin);
-            if(create_file(name) == 1){
-                printf("Error al crear el archivo\n");
-            }else{
-                printf("Archivo creado con exito\n");
-            }
+            printf("Ingrese el nombre del archivo: ");
+            scanf(" %[^\n]", name);
+            create_file(name);
             break;
         case 0:
             printf("Saliendo...\n");
