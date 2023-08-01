@@ -62,6 +62,20 @@ int delete_file(char name[50]){
     }
 }
 
+// Binaries
+void create_file_bin(char name[50]){
+    char filename[54];
+    strcpy(filename, name);
+    strcat(filename, ".bin");
+    FILE *file = fopen(filename, "wb");
+    if(file == NULL){
+        printf("Error al crear el archivo\n");
+    }else{
+        printf("Archivo creado con exito\n");
+    }
+    fclose(file);
+}
+
 int main(){
     int option;
     do
@@ -71,6 +85,7 @@ int main(){
         printf("2. Leer archivo\n");
         printf("3. Agregar texto a un archivo\n");
         printf("4. Eliminar archivo\n");
+        printf("5. Crear archivo binario\n");
         printf("0. Salir\n");
         printf("_________________________________________________\n");
         printf("Opcion:\n");
@@ -101,6 +116,12 @@ int main(){
             printf("Ingrese el nombre del archivo: ");
             scanf(" %[^\n]", name3);
             delete_file(name3);
+            break;
+        case 5:
+            char name4[50];
+            printf("Ingrese el nombre del archivo: ");
+            scanf(" %[^\n]", name4);
+            create_file_bin(name4);
             break;
         case 0:
             printf("Saliendo...\n");
