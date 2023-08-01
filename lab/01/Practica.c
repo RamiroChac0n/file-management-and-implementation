@@ -68,15 +68,14 @@ int create_file_bin(char name[50]){
     char text[200];
     strcpy(filename, name);
     strcat(filename, ".dat");
-    FILE *file = fopen(filename, "w+");
+    FILE *file = fopen(filename, "wb");
     if(file == NULL){
         printf("Error al crear el archivo\n");
     }
     printf("Archivo creado con exito\n");
     printf("Ingrese el texto a agregar: \n");
     scanf(" %[^\n]", text);
-    int tam_int = sizeof(text);
-    fwrite(text, tam_int, 1, file);
+    fwrite(text, sizeof(char), strlen(text), file);
     printf("Datos escritos correctamente....\n");
     fclose(file);
     return 0;
@@ -87,7 +86,7 @@ int read_file_bin(char name[50]){
     char text[200]; // Agregar una nueva variable para almacenar el texto leído
     strcpy(filename, name);
     strcat(filename, ".dat");
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(filename, "rb");
     if(file == NULL){
         printf("Error al abrir el archivo\n");
         return 1;
@@ -100,23 +99,25 @@ int read_file_bin(char name[50]){
     return 0;
 }
 
-
-void update_file_bin(char name[50]){
+void update_file_bin(char name[50]) {
     char filename[54];
+    char text[200];
     strcpy(filename, name);
     strcat(filename, ".dat");
-    FILE *file = fopen(filename, "ab");
-    if(file == NULL){
+    FILE* file = fopen(filename, "ab");
+    if (file == NULL) {
         printf("Error al abrir el archivo\n");
-    }else{
+    } else {
         printf("Archivo abierto con exito\n");
-        char text[200];
-        printf("Ingrese el texto a agregar: ");
+        printf("Ingrese el texto a agregar: \n");
         scanf(" %[^\n]", text);
-        fprintf(file, "%s\n", text);
+        fflush(stdin);
+        fwrite(text, sizeof(char), strlen(text), file);
         printf("Texto agregado con exito\n");
     }
+    fclose(file);
 }
+
 
 int main(){
     int option;
