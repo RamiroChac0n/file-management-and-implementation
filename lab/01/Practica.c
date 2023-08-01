@@ -49,6 +49,19 @@ void update_file(char name[50]){
     fclose(file);
 }
 
+int delete_file(char name[50]){
+    char filename[54];
+    strcpy(filename, name);
+    strcat(filename, ".txt");
+    if(remove(filename) == 0){
+        printf("Archivo eliminado con exito\n");
+        return 1;
+    }else{
+        printf("Error al eliminar el archivo\n");
+        return 0;
+    }
+}
+
 int main(){
     int option;
     do
@@ -57,6 +70,7 @@ int main(){
         printf("1. Crear archivo\n");
         printf("2. Leer archivo\n");
         printf("3. Agregar texto a un archivo\n");
+        printf("4. Eliminar archivo\n");
         printf("0. Salir\n");
         printf("_________________________________________________\n");
         printf("Opcion:\n");
@@ -81,6 +95,12 @@ int main(){
             printf("Ingrese el nombre del archivo: ");
             scanf(" %[^\n]", name2);
             update_file(name2);
+            break;
+        case 4:
+            char name3[50];
+            printf("Ingrese el nombre del archivo: ");
+            scanf(" %[^\n]", name3);
+            delete_file(name3);
             break;
         case 0:
             printf("Saliendo...\n");
