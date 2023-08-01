@@ -63,40 +63,48 @@ int delete_file(char name[50]){
 }
 
 // Binaries
-void create_file_bin(char name[50]){
+int create_file_bin(char name[50]){
     char filename[54];
+    char text[200];
     strcpy(filename, name);
-    strcat(filename, ".bin");
-    FILE *file = fopen(filename, "wb");
+    strcat(filename, ".dat");
+    FILE *file = fopen(filename, "w+");
     if(file == NULL){
         printf("Error al crear el archivo\n");
-    }else{
-        printf("Archivo creado con exito\n");
     }
+    printf("Archivo creado con exito\n");
+    printf("Ingrese el texto a agregar: \n");
+    scanf(" %[^\n]", text);
+    int tam_int = sizeof(text);
+    fwrite(text, tam_int, 1, file);
+    printf("Datos escritos correctamente....\n");
     fclose(file);
+    return 0;
 }
 
-void read_file_bin(char name[50]){
+int read_file_bin(char name[50]){
     char filename[54];
+    char text[200]; // Agregar una nueva variable para almacenar el texto leído
     strcpy(filename, name);
-    strcat(filename, ".bin");
-    FILE *file = fopen(filename, "rb");
+    strcat(filename, ".dat");
+    FILE *file = fopen(filename, "r");
     if(file == NULL){
         printf("Error al abrir el archivo\n");
-    }else{
-        printf("Archivo abierto con exito\n");
-        char text[200];
-        while(fgets(text, 200, file) != NULL){
-            printf("%s", text);
-        }
+        return 1;
     }
+    printf("Archivo abierto con exito\n");
+    fread(text, sizeof(char), sizeof(text), file); // Leer el texto en la variable "text"
+    printf("Datos leidos correctamente\n");
+    printf("Texto: %s\n", text); // Imprimir el texto leído desde el archivo
     fclose(file);
+    return 0;
 }
+
 
 void update_file_bin(char name[50]){
     char filename[54];
     strcpy(filename, name);
-    strcat(filename, ".bin");
+    strcat(filename, ".dat");
     FILE *file = fopen(filename, "ab");
     if(file == NULL){
         printf("Error al abrir el archivo\n");
