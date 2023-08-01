@@ -93,6 +93,23 @@ void read_file_bin(char name[50]){
     fclose(file);
 }
 
+void update_file_bin(char name[50]){
+    char filename[54];
+    strcpy(filename, name);
+    strcat(filename, ".bin");
+    FILE *file = fopen(filename, "ab");
+    if(file == NULL){
+        printf("Error al abrir el archivo\n");
+    }else{
+        printf("Archivo abierto con exito\n");
+        char text[200];
+        printf("Ingrese el texto a agregar: ");
+        scanf(" %[^\n]", text);
+        fprintf(file, "%s\n", text);
+        printf("Texto agregado con exito\n");
+    }
+}
+
 int main(){
     int option;
     do
@@ -104,6 +121,7 @@ int main(){
         printf("4. Eliminar archivo\n");
         printf("5. Crear archivo binario\n");
         printf("6. Leer archivo binario\n");
+        printf("7. Agregar texto a un archivo binario\n");
         printf("0. Salir\n");
         printf("_________________________________________________\n");
         printf("Opcion:\n");
@@ -146,6 +164,12 @@ int main(){
             printf("Ingrese el nombre del archivo: ");
             scanf(" %[^\n]", name5);
             read_file_bin(name5);
+            break;
+        case 7:
+            char name6[50];
+            printf("Ingrese el nombre del archivo: ");
+            scanf(" %[^\n]", name6);
+            update_file_bin(name6);
             break;
         case 0:
             printf("Saliendo...\n");
