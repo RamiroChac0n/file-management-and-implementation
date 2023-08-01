@@ -3,7 +3,6 @@
 int main(){
     FILE *fd;
     char *filename = "number.dat";
-    int num;
     fd = fopen(filename, "r");
     if (fd == NULL)
     {
@@ -14,7 +13,7 @@ int main(){
     int tam_int = sizeof(int);
     int i;
     int r = fread(&i, tam_int, 1, fd);
-    for (i = 0; i < 10; i++)
+    while (r != 0)
     {
         printf("Numero %d leido\n", i);
         r = fread(&i, tam_int, 1, fd);
