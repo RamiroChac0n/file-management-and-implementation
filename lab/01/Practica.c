@@ -14,6 +14,23 @@ void create_file(char name[50]){
     fclose(file);
 }
 
+void read_file(char name[50]){
+    char filename[54];
+    strcpy(filename, name);
+    strcat(filename, ".txt");
+    FILE *file = fopen(filename, "r");
+    if(file == NULL){
+        printf("Error al abrir el archivo\n");
+    }else{
+        printf("Archivo abierto con exito\n");
+        char text[200];
+        while(fgets(text, 200, file) != NULL){
+            printf("%s", text);
+        }
+    }
+    fclose(file);
+}
+
 void update_file(char name[50]){
     char filename[54];
     strcpy(filename, name);
@@ -38,7 +55,8 @@ int main(){
     {
         printf("\n______________________ Menu ______________________\n");
         printf("1. Crear archivo\n");
-        printf("2. Agregar texto a un archivo\n");
+        printf("2. Leer archivo\n");
+        printf("3. Agregar texto a un archivo\n");
         printf("0. Salir\n");
         printf("_________________________________________________\n");
         printf("Opcion:\n");
@@ -53,6 +71,12 @@ int main(){
             create_file(name);
             break;
         case 2:
+            char name1[50];
+            printf("Ingrese el nombre del archivo: ");
+            scanf(" %[^\n]", name1);
+            read_file(name1);
+            break;
+        case 3:
             char name2[50];
             printf("Ingrese el nombre del archivo: ");
             scanf(" %[^\n]", name2);
