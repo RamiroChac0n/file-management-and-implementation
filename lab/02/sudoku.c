@@ -148,7 +148,7 @@ void elegir_porsicion(int numero, int mapa[9][9], int *fila_elegida, int *collum
     int fila = -1, columna = -1;
     bool validar = false;
     while(fila < 0 || columna > 9 || validar == false){
-        printf("Elija la fila donde desea colocar este numero\n");
+        printf("\nElija la fila donde desea colocar este numero\n");
         scanf("%d", &fila);
         if(fila < 0 || fila > 9){
             printf("Fila invalida\n");
