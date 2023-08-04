@@ -144,7 +144,7 @@ bool validar_jugada(int fila, int columna, int mapa_origen[9][9]){
     }
 }
 
-void elegir_porsicion(int numero, int mapa[9][9], int *fila_elegida, int *collumna_elegida, int mapa_origen[9][9]){
+void elegir_porsicion(int numero, int mapa[9][9], int *fila_elegida, int *columna_elegida, int mapa_origen[9][9]){
     int fila = -1, columna = -1;
     bool validar = false;
     while(fila < 0 || columna > 9 || validar == false){
@@ -170,7 +170,7 @@ void elegir_porsicion(int numero, int mapa[9][9], int *fila_elegida, int *collum
         }
     }
     *fila_elegida = fila;
-    *collumna_elegida = columna;
+    *columna_elegida = columna;
 }
 
 bool evaluar_victoria(int mapa[9][9], int solucion[9][9]){
