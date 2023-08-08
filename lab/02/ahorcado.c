@@ -130,30 +130,28 @@ bool evaluar_victoria(char ahorcado[10], char solucion[10]){
 
 int main(){
     char ahorcado[10], ahorcado_origen[10], solucion[10];
-    int posicion = -1, continuar = 1;
     char jugar = ' ';
     do
     {
+        int posicion = -1, continuar = 1;
         int eleccion = elegir_ahorcado();
         cargar_sobre_arreglo(cargar_ahorcado(eleccion), ahorcado);
         memcpy(ahorcado_origen, ahorcado, sizeof(ahorcado));
         cargar_sobre_arreglo("ahorcado1_solucion.txt", solucion);
 
-        int vidas = 5;
-
-        while (vidas > 0){
-            system("clear");
-            printf("Vidas restantes: %d\n", vidas);
+        while (continuar != 0 && continuar != 6){
             char letra = escoger_letra(ahorcado);
             elegir_posicion(letra, ahorcado, &posicion, ahorcado_origen);
-            system("clear");
             actualizar_ahorcado(ahorcado, posicion, letra);
-            mostrar_ahorcado(solucion);
+            mostrar_ahorcado(ahorcado);
             bool victoria = evaluar_victoria(ahorcado, solucion);
             if(victoria == true){
                 continuar = 0;
                 system("clear");
                 printf("Felicidades, ha ganado\n");
+            }else{
+                system("clear");
+                continuar++;
             }            
         }
 
