@@ -31,20 +31,18 @@ char *cargar_ahorcado(int eleccion){
     return nombre_archivo;
 }
 
-void mostrar_ahorcado(char *nombre_archivo){
-    FILE *archivo = fopen(nombre_archivo, "r");
-    char letra = ' ';
-    if(archivo == NULL){
-        printf("archivo no encontrado\n");
-    }else{
-        while ((letra = getc(archivo)) != EOF)
-        {
-            printf("%c", letra);
-        }
+void mostrar_ahorcado(char ahorcado[10]){
+    int posicion = 0;
+    printf("\n");
+    while (posicion < 6)
+    {
+        printf("%c ", ahorcado[posicion]);
+        posicion++;
     }
+    printf("\n");
 }
 
-void cargar_sobre_arreglo(char *nombre_archivo, char *arreglo){
+void cargar_sobre_arreglo(char *nombre_archivo, char ahorcado[10]){
     FILE *archivo = fopen(nombre_archivo, "r");
     char letra = ' ';
     int contador = 0;
@@ -53,18 +51,20 @@ void cargar_sobre_arreglo(char *nombre_archivo, char *arreglo){
     }else{
         while ((letra = getc(archivo)) != EOF)
         {
-            arreglo[contador] = letra;
-            contador++;
+            if(letra != '\n'){
+                ahorcado[contador] = letra;
+                contador++;
+            }
         }
     }
 }
 
-char escoger_letra(char *nombre_archivo){
+char escoger_letra(char ahorcado[10]){
     char letra = ' ';
     int continuar = 1;
     while (continuar)
     {
-        mostrar_ahorcado(nombre_archivo);
+        mostrar_ahorcado(ahorcado);
         printf("Escoja una letra: ");
         scanf(" %c", &letra);
         if(letra >= 65 && letra <= 90){
@@ -84,31 +84,11 @@ char *cargar_solucion(int valor){
     return nombre_archivo;
 }
 
-void actualizar_ahorcado(char *nombre_archivo, char letra){
-    FILE *archivo = fopen(nombre_archivo, "r");
-    char letra_archivo = ' ';
-    char *nuevo_archivo = malloc(sizeof(char) * 100);
-    int contador = 0;
-    if(archivo == NULL){
-        printf("archivo no encontrado\n");
-    }else{
-        while ((letra_archivo = getc(archivo)) != EOF)
-        {
-            if(letra_archivo == '_'){
-                nuevo_archivo[contador] = letra;
-            }else{
-                nuevo_archivo[contador] = letra_archivo;
-            }
-            contador++;
-        }
-    }
-    fclose(archivo);
-    archivo = fopen(nombre_archivo, "w");
-    fprintf(archivo, "%s", nuevo_archivo);
-    fclose(archivo);
+void actualizar_ahorcado(char ahorcado[10], int posicion, char letra){
+    ahorcado[posicion] = letra;
 }
 
-bool validar_jugada(int posicion, int ahorcado_origen[10]){
+bool validar_jugada(int posicion, char ahorcado_origen[10]){
     if(ahorcado_origen[posicion] == '_'){
         return true;
     }else{
@@ -116,7 +96,7 @@ bool validar_jugada(int posicion, int ahorcado_origen[10]){
     }
 }
 
-void elegir_posicion(char letra, int ahorcado[10], int *posicionElegida, int ahorcado_origen[10]){
+void elegir_posicion(char letra, char ahorcado[10], int *posicionElegida, char ahorcado_origen[10]){
     int posicion = -1;
     bool validar = false;
     while(posicion < 0 || posicion > 9 || validar == false){
@@ -136,31 +116,47 @@ void elegir_posicion(char letra, int ahorcado[10], int *posicionElegida, int aho
     *posicionElegida = posicion;
 }
 
-bool evaluar_victoria(char *nombre_archivo){
-    FILE *archivo = fopen(nombre_archivo, "r");
-    char letra_archivo = ' ';
-    if(archivo == NULL){
-        printf("archivo no encontrado\n");
-    }else{
-        while ((letra_archivo = getc(archivo)) != EOF)
-        {
-            if(letra_archivo == '_'){
-                return false;
-            }
+bool evaluar_victoria(char ahorcado[10], char solucion[10]){
+    int posicion = 0;
+    while (posicion < 6)
+    {
+        if(ahorcado[posicion] != solucion[posicion]){
+            return false;
         }
+        posicion++;
     }
     return true;
 }
 
 int main(){
-    int ahorcado[10], ahorcado_origen[10], solucion[10], posicion = -1, continuar = 1;
+    char ahorcado[10], ahorcado_origen[10], solucion[10];
+    int posicion = -1, continuar = 1;
     char jugar = ' ';
     do
     {
         int eleccion = elegir_ahorcado();
-        char *nombre_archivo = cargar_ahorcado(eleccion);
-        system("clear");
-        char letra = escoger_letra(nombre_archivo);
+        cargar_sobre_arreglo(cargar_ahorcado(eleccion), ahorcado);
+        memcpy(ahorcado_origen, ahorcado, sizeof(ahorcado));
+        cargar_sobre_arreglo("ahorcado1_solucion.txt", solucion);
+
+        int vidas = 5;
+
+        while (vidas > 0){
+            system("clear");
+            printf("Vidas restantes: %d\n", vidas);
+            char letra = escoger_letra(ahorcado);
+            elegir_posicion(letra, ahorcado, &posicion, ahorcado_origen);
+            system("clear");
+            actualizar_ahorcado(ahorcado, posicion, letra);
+            mostrar_ahorcado(solucion);
+            bool victoria = evaluar_victoria(ahorcado, solucion);
+            if(victoria == true){
+                continuar = 0;
+                system("clear");
+                printf("Felicidades, ha ganado\n");
+            }            
+        }
+
         printf("Seguir jugando? (s/n)\n");
         scanf(" %c", &jugar);
     } while (jugar == 's' || jugar == 'S');
