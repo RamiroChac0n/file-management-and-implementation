@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "operaciones.h"
+#include "persistencia.h"
 
 int cargarEmpleados(struct empleado empleados[100]){
     int n_emp = 0;

@@ -7,7 +7,7 @@ void mostrarMenu(){
     printf("\nIntroduce la opción que desea realizar:\n");
     printf("\n1. Alta empleado\n");
     printf("2. Baja empleado\n");
-    printf("3. Listar empleado");
+    printf("3. Listar empleado\n");
     printf("4. Consultar datos de un empleado\n");
     printf("5. Modificar el sueldo de un empleado\n");
     printf("6. Modificar horas de un empleado\n");
