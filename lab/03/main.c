@@ -38,7 +38,7 @@ int main(){
                 modificarSueldo(empleados, num_emp);
                 break;
             case 6:
-                printf("Modificar horas de un empleado\n");
+                modificarHoras(empleados, num_emp);
                 break;
             default:
                 printf("Opción no válida\n");

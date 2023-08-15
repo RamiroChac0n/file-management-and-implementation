@@ -129,3 +129,21 @@ void modificarSueldo(struct empleado empleados[100], int num_emp){
         printf("No existe ningún empleado con ese ID\n");
     }
 }
+
+void modificarHoras(struct empleado empleados[100], int num_emp){
+    int id;
+    printf("Introduce el ID del empleado a modificar:\n");
+    scanf("%d", &id);
+
+    int existe = comprobarId(empleados, num_emp, id);
+    if(existe == 1){
+        for(int i = 0; i < num_emp; i++){
+            if(empleados[i].id == id){
+                printf("Introduce las nuevas horas:\n");
+                scanf("%d", &empleados[i].horas);
+            }
+        }
+    }else{
+        printf("No existe ningún empleado con ese ID\n");
+    }
+}
