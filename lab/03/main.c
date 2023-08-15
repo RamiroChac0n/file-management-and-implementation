@@ -47,6 +47,7 @@ int main(){
         mostrarMenu();
         scanf("%d", &opcion);
     }
+    guardarEmpleados(empleados, num_emp);
     printf("Hasta luego...\n");
     return 0;
 }
