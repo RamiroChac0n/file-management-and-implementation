@@ -37,9 +37,8 @@ int alta(struct empleado empleados[100], int num_emp){
     int creado = 0;
     struct empleado emp;
 
-    fflush(stdin);
     printf("Introduce el nombre y apellidos del empleado:\n");
-    scanf("%[^\n]s", emp.nombre);
+    scanf(" %s", emp.nombre);
 
     printf("Introduce el ID del empleado:\n");
     scanf("%d", &emp.id);
