@@ -9,7 +9,7 @@ int elegir_ahorcado(){
     while (continuar)
     {
         printf("------------------------------------\n");
-        printf("Escoja un mapa\n");
+        printf("Escoja dificultad\n");
         scanf("%d", &eleccion);
         if (eleccion > 0 && eleccion < 10)
         {
@@ -128,30 +128,61 @@ bool evaluar_victoria(char ahorcado[10], char solucion[10]){
     return true;
 }
 
+int puntuacion(int vidas){
+    return vidas * 100;
+}
+
+void savePlayer(char *nombre, int puntuacion){
+    FILE *archivo = fopen("jugadores.txt", "a");
+    if(archivo == NULL){
+        printf("archivo no encontrado\n");
+    }else{
+        fprintf(archivo, "%s;%d\n", nombre, puntuacion);
+    }
+    fclose(archivo);
+}
+
 int main(){
+    printf("Bienvenido al juego del ahorcado\n");
+    printf("Instrucciones:\n");
+    printf("1. Escoja un nivel\n");
+    printf("2. Solo se pueden escoger letras\n");
+    printf("3. Las letras deben estar en mayuscula\n");
+    printf("4. Escoja posiciones del 1 en adelante\n");
     char ahorcado[10], ahorcado_origen[10], solucion[10];
     char jugar = ' ';
     do
     {
-        int posicion = -1, continuar = 1;
+        int posicion = -1;
         int eleccion = elegir_ahorcado();
+        system("clear");
+
+        int vidas = 10;
+        printf("Vidas: %d\n", vidas);
+
         cargar_sobre_arreglo(cargar_ahorcado(eleccion), ahorcado);
         memcpy(ahorcado_origen, ahorcado, sizeof(ahorcado));
         cargar_sobre_arreglo("ahorcado1_solucion.txt", solucion);
 
-        while (continuar != 0 && continuar != 6){
+        while (vidas > 0){
             char letra = escoger_letra(ahorcado);
             elegir_posicion(letra, ahorcado, &posicion, ahorcado_origen);
             actualizar_ahorcado(ahorcado, posicion, letra);
             mostrar_ahorcado(ahorcado);
             bool victoria = evaluar_victoria(ahorcado, solucion);
             if(victoria == true){
-                continuar = 0;
                 system("clear");
                 printf("Felicidades, ha ganado\n");
+                printf("Puntuacion: %d\n", puntuacion(vidas));
+                char *nombre = malloc(sizeof(char) * 20);
+                printf("Ingrese su nombre: ");
+                scanf("%s", nombre);
+                savePlayer(nombre, puntuacion(vidas));
+                break;
             }else{
                 system("clear");
-                continuar++;
+                vidas--;
+                printf("Vidas: %d\n", vidas);
             }            
         }
 
