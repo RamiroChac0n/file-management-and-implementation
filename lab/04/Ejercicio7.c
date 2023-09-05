@@ -19,7 +19,7 @@ void actualizarPrecios(const char *nombre, int cantRegistro){
         return;
     }
     Articulo aux;   // Crear una variable auxiliar para leer los articulos del archivo
-    unsigned tam = sizeof(Articulo);    // Obtener el tamaño de la estructura Articulo
+    int tam = sizeof(Articulo);    // Obtener el tamaño de la estructura Articulo
     for (int i = 0; i < cantRegistro; i++){
         fflush(arch);   // Limpiar el buffer del archivo
         fread(&aux, tam, 1, arch);  // Leer un articulo del archivo

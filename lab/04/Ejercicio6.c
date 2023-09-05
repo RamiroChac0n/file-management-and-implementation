@@ -26,17 +26,21 @@ int main(){
     if (pf == NULL)         // Verificar que el archivo se haya abierto correctamente
         printf("Error al abrir el archivo\n");   // Imprimir un mensaje de error
 
-    Articulo aux;
     fseek(pf, 01, SEEK_END);  // Mover el puntero del archivo a la posicion del segundo articulo
     int cant_registros = ftell(pf) / sizeof(Articulo);  // Obtener la cantidad de registros en el archivo
     rewind(pf);     // Mover el puntero del archivo al inicio
-    fread(&aux, sizeof(Articulo), 1, pf);    // Leer el primer articulo del archivo
-    printf("----------- CANTIDAD DE REGISTROS EN EL FICHERO ----\n");
-    printf("Cantidad de registros: %d\n \n", cant_registros);   // Imprimir el codigo del articulo
-    printf("----------- EL ARTICULO SOLICITADO ES -----------\n");
-    printf("Codigo: %d\n", aux.codArt);      // Imprimir el codigo del articulo
-    printf("Precio: %.2f\n", aux.precio);    // Imprimir el precio del articulo
-    printf("Descripcion: %s\n", aux.descrip);    // Imprimir la descripcion del articulo
+    void* vec = malloc(sizeof(Articulo) * cant_registros); // Crear un vector auxiliar para almacenar los articulos
+    fread(vec, sizeof(Articulo), cant_registros, pf);   // Leer los articulos del archivo
+
+    for(int i = 0; i < cant_registros; i++, vec += sizeof(Articulo)){ // Recorrer el vector de articulos
+        mostrarRegistro(vec);   // Mostrar el articulo
+    }
 
     return 0;       // Terminar el programa
+}
+void mostrarRegistro(void* dato){
+    Articulo *art = (Articulo *)dato;
+    printf("Codigo: %d\n", art->codArt);      // Imprimir el codigo del articulo
+    printf("Precio: %.2f\n", art->precio);    // Imprimir el precio del articulo
+    printf("Descripcion: %s\n", art->descrip);    // Imprimir la descripcion del articulo
 }
