@@ -29,12 +29,12 @@ main() {
         pos_bus = toma_campo(apellido, buffreg, pos_bus, long_reg);
         pos_bus = toma_campo(nombre, buffreg, pos_bus, long_reg);
         hazllave(apellido, nombre, llave_enc);
-        if (strncpy(llave_enc, llave_bus) == 0)
+        if (strmp(llave_enc, llave_bus) == 0)
             encontro = EXITO;
     }
 
     if (encontro) {
-        printf("\n\nSe encontro el registro: \n\n")
+        printf("\n\nSe encontro el registro: \n\n");
         pos_bus = 0;
 
         while ((pos_bus = toma_campo(campo, buffreg, pos_bus, long_reg)) > 0)
