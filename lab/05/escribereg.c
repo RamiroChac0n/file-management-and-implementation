@@ -9,7 +9,7 @@ char *solicitud[] = {
     "                               Ciudad: ",
     "                               Estado: ",
     "                           Cod. Post.: ",
-    " "
+    "\0"
 };
 
 main(){
