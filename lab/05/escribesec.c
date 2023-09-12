@@ -1,5 +1,5 @@
 #include "arches.h"
-#define saca_cad(fd, cad)   write(fd, cad, strlen(cad))
+#define saca_cad(fd, cad)   write((fd), (cad), strlen(cad))
 
 main(){
     char nombre[30], apellido[30], direccion[30], ciudad[30];

@@ -24,7 +24,7 @@ leecampo(fd, cad)
     int fd;
     char cad[];
 {
-    int n, i;
+    int i;
     char c;
 
     i = 0;
