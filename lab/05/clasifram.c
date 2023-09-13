@@ -23,8 +23,12 @@ main(){
     }
 
     cont_reg = encabezado.cont_reg;
+
+    registros = (REGDATOS *) calloc(cont_reg, sizeof(REGDATOS));
+    nodosllave = (NODOLLAVE *) calloc(cont_reg, sizeof(NODOLLAVE));
+    indice = (short *) calloc(cont_reg, sizeof(short));
     
-    if(registros == OL || nodosllave == OL || indice == OL){
+    if(registros == 0L || nodosllave == 0L || indice == 0L){
         printf("No se pudo asignar el espacio requerido\n");
         printf("El archivo es demasiado grande para\n");
         printf("clasificarse en memoria\n");
@@ -66,7 +70,7 @@ static toma_archsal(){
 
     printf("Proporcione el nombre del archivo de salida: ");
     gets(nomarch);
-    if((fd = creat(nomarch, MODOP)) < 0){
+    if((fd = creat(nomarch, 0644/*MODOP*/)) < 0){
         printf("El archivo %s no puede crearse\n", nomarch);
     }else{
         write(fd, &encabezado, sizeof(encabezado));
