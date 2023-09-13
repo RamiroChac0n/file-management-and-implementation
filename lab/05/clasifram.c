@@ -1,4 +1,5 @@
 #include "arches.h"
+#include <string.h>
 #define LONG_REG 64
 typedef char NODOLLAVE[30];
 typedef char REGDATOS [LONG_REG +1];
