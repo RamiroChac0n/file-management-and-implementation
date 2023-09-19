@@ -20,6 +20,16 @@ static int toma_campo();
 static void mayusculas();
 static void extrae_llave();
 
+/*
+    La función main() es el programa principal. El programa lee el nombre del
+    archivo de entrada y del archivo de salida, abre los archivos y lee el
+    encabezado del archivo de entrada. A continuación, el programa lee los
+    registros del archivo de entrada y los coloca en un arreglo de registros.
+    El programa crea un arreglo de llaves a partir de los registros y un arreglo
+    de índices que apuntan a los registros. El programa clasifica los índices
+    de acuerdo con el orden de las llaves y escribe los registros en el archivo
+    de salida en el orden especificado por los índices.
+*/
 int main(){
     int fd_ent, fd_sal, i, cont_reg;
     //char *calloc();
@@ -64,6 +74,14 @@ int main(){
     return(0);
 }
 
+
+/*
+    La función toma_archent() abre el archivo de entrada y lee el encabezado
+    del archivo. Si el archivo no puede abrirse, se imprime un mensaje de error
+    y se termina el programa. Si el archivo se abre correctamente, se lee el
+    encabezado del archivo y se devuelve el descriptor de archivo del archivo
+    de entrada.
+*/
 static int toma_archent(){
     char nomarch[30];
     int fd;
@@ -79,6 +97,14 @@ static int toma_archent(){
     return(fd);
 }
 
+
+/*
+    La función toma_archsal() abre el archivo de salida y escribe el encabezado
+    del archivo. Si el archivo no puede abrirse, se imprime un mensaje de error
+    y se termina el programa. Si el archivo se abre correctamente, se escribe el
+    encabezado del archivo y se devuelve el descriptor de archivo del archivo
+    de salida.
+*/
 static int toma_archsal(){
     char nomarch[30];
     int fd;
@@ -96,6 +122,11 @@ static int toma_archsal(){
 #define CAMPO_LLAVE(i) nodosllave [indice[(i)]]
 typedef char NODOLLAVE[30];
 
+/*
+    La función clasif_shell() clasifica los registros en el arreglo de índices
+    de acuerdo con el orden de las llaves en el arreglo de llaves. La clasificación
+    se realiza mediante el método de clasificación shell.
+*/
 void clasif_shell(indice, nodosllave, n)
     short indice[];
     NODOLLAVE nodosllave[];
@@ -119,6 +150,10 @@ void clasif_shell(indice, nodosllave, n)
     }
 }
 
+/*
+    La función toma_campo() toma un campo del registro y lo coloca en el arreglo
+    "campo". La función devuelve la posición del siguiente campo en el registro.
+*/
 int toma_campo(campo, buffreg, pos_bus, long_reg)
     char campo[], buffreg[];
     short pos_bus, long_reg;
@@ -139,6 +174,10 @@ int toma_campo(campo, buffreg, pos_bus, long_reg)
 
 }
 
+/*
+    La función cadespac() elimina los espacios en blanco del final de la cadena
+    "cad". La función devuelve la longitud de la cadena sin los espacios en blanco.
+*/
 int cadespac(cad)
     char cad[];
 {
@@ -151,6 +190,10 @@ int cadespac(cad)
     return(i);
 }
 
+/*
+    La función mayusculas() convierte la cadena "cadent" en mayúsculas y la
+    coloca en la cadena "cadsal".
+*/
 void mayusculas(cadent, cadsal)
     char cadent[], cadsal[];
 {
@@ -158,6 +201,11 @@ void mayusculas(cadent, cadsal)
         cadent++;
 }
 
+/*
+    La función hazllave() crea una llave a partir de los campos "apellido" y
+    "nombre" y la coloca en la cadena "cad". La función devuelve la longitud
+    de la llave.
+*/
 int hazllave(apellido, nombre, cad)
     char apellido[], nombre[], cad[];
 {
@@ -173,6 +221,10 @@ int hazllave(apellido, nombre, cad)
     return(longap + longnom);
 }
 
+/*
+    La función extrae_llave() extrae la llave del registro y la coloca en la
+    cadena "llave".
+*/
 static void extrae_llave(llave, registro)
     REGDATOS registro;
     char llave[];
