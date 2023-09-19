@@ -1,4 +1,4 @@
-cadespace(cad)
+void cadespace(cad)
     char cad[];
 {
     int i;
@@ -10,7 +10,7 @@ cadespace(cad)
     return(i);
 }
 
-mayusculas(cadent, cadsal)
+void mayusculas(cadent, cadsal)
     char cadent[], cadsal[];
 {
     while (*cadsal++ = (*cadent >= 'a' && *cadent <= 'z') ? *cadent & 0x5F : *cadent)

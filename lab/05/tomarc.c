@@ -1,6 +1,6 @@
 #include "arches.h"
 
-toma_reg(fd, buffreg)
+int toma_reg(fd, buffreg)
     int fd;
     char buffreg[];
 {
@@ -12,7 +12,7 @@ toma_reg(fd, buffreg)
     return (long_reg);
 }
 
-toma_campo(campo, buffreg, pos_bus, long_reg)
+int toma_campo(campo, buffreg, pos_bus, long_reg)
     char campo[], buffreg[];
     short pos_bus, long_reg;
 {

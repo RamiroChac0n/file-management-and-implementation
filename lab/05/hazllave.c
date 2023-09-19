@@ -1,4 +1,4 @@
-hazllave(apellido, nombre, cad)
+int hazllave(apellido, nombre, cad)
     char apellido[], nombre[], cad[];
 {
     int longap, longnom;
