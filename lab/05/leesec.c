@@ -20,6 +20,10 @@ main(){
     close(fd);
 }
 
+/*
+    La función leecampo() lee un campo del archivo "fd" y lo coloca en la cadena
+    "cad". La función devuelve la longitud del campo leído.
+*/
 leecampo(fd, cad)
     int fd;
     char cad[];

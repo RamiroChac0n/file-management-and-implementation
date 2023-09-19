@@ -1,3 +1,8 @@
+/*
+    La función hazllave() crea una llave a partir de los campos "apellido" y
+    "nombre" y la coloca en la cadena "cad". La función devuelve la longitud
+    de la llave.
+*/
 int hazllave(apellido, nombre, cad)
     char apellido[], nombre[], cad[];
 {

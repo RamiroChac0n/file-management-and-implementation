@@ -1,5 +1,9 @@
 #include "arches.h"
 
+/*
+    La función toma_reg() lee un registro del archivo "fd" y lo coloca en el
+    arreglo "buffreg". La función devuelve la longitud del registro leído.
+*/
 int toma_reg(fd, buffreg)
     int fd;
     char buffreg[];
@@ -12,6 +16,10 @@ int toma_reg(fd, buffreg)
     return (long_reg);
 }
 
+/*
+    La función toma_campo() toma un campo del registro y lo coloca en el arreglo
+    "campo". La función devuelve la posición del siguiente campo en el registro.
+*/
 int toma_campo(campo, buffreg, pos_bus, long_reg)
     char campo[], buffreg[];
     short pos_bus, long_reg;

@@ -81,6 +81,10 @@ int main(){
     return(0);
 }
 
+/*
+    La función menu() muestra un menú de opciones y devuelve la opción elegida
+    por el usuario.
+*/
 static int menu(){
     int elección;
     char respuesta[10];
@@ -97,6 +101,10 @@ static int menu(){
     return(elección);
 }
 
+/*
+    La función pide_info() solicita al usuario que proporcione los valores de
+    los campos del registro. Los valores se almacenan en el arreglo buffreg.
+*/
 static void pide_info(buffreg)
     char buffreg[];
 {
@@ -113,6 +121,11 @@ static void pide_info(buffreg)
     }
 }
 
+/*
+    La función pide_nrr() solicita al usuario que proporcione el número relativo
+    del registro que desea actualizar. El número relativo se devuelve como el
+    valor de la función.
+*/
 static int pide_nrr(){
     int nrr;
     char respuesta[10];
@@ -124,6 +137,10 @@ static int pide_nrr(){
     return(nrr);
 }
 
+/*
+    La función lee_y_muestra() lee el registro del archivo y lo muestra en la
+    pantalla.
+*/
 static void lee_y_muestra(){
     char buffreg[TAM_MAX_REG +1], campo[TAM_MAX_REG +1];
     int pos_bus, long_datos;
@@ -141,6 +158,11 @@ static void lee_y_muestra(){
         printf("\t%s\n", campo);
 }
 
+/*
+    La función cambio() solicita al usuario que confirme si desea modificar el
+    registro. La función devuelve 1 si el usuario responde afirmativamente y 0
+    si responde negativamente.
+*/
 static int cambio(){
     char respuesta[10];
 
@@ -151,6 +173,11 @@ static int cambio(){
     return((respuesta[0] == 'S') ? 1 : 0);
 }
 
+/*
+    La función mayusculas() convierte la cadena de caracteres apuntada por
+    cadent a mayúsculas y la almacena en la cadena de caracteres apuntada por
+    cadsal.
+*/
 void mayusculas(cadent, cadsal)
     char cadent[], cadsal[];
 {
@@ -158,6 +185,10 @@ void mayusculas(cadent, cadsal)
         cadent++;
 }
 
+/*
+    La función toma_campo() toma un campo del registro y lo coloca en el arreglo
+    "campo". La función devuelve la posición del siguiente campo en el registro.
+*/
 int toma_campo(campo, buffreg, pos_bus, long_reg)
     char campo[], buffreg[];
     short pos_bus, long_reg;
