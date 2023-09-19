@@ -9,6 +9,6 @@ int hazllave(apellido, nombre, cad)
     cad[longap] = '\0';
     longnom = cadespac(nombre);
     strcat(cad, nombre);
-    mayusculas(cad);
+    mayusculas(cad, cad);
     return(longap + longnom);
 }
