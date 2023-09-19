@@ -1,6 +1,10 @@
 #include "arches.h"
 #define saca_cad(fd, cad)   write((fd), (cad), strlen(cad))
 
+/*
+    El programa principal crea un archivo de registros secuenciales y permite
+    al usuario agregar registros al final del archivo.
+*/
 main(){
     char nombre[30], apellido[30], direccion[30], ciudad[30];
     char estado[15], cp[9];

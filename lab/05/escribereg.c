@@ -12,6 +12,10 @@ char *solicitud[] = {
     "\0"
 };
 
+/*
+    El programa principal crea un archivo de registros secuenciales y permite
+    al usuario agregar registros al final del archivo.
+*/
 main(){
     char respuesta[50];
     char nomarch[15];

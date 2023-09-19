@@ -27,6 +27,11 @@ static int cambio();
 void mayusculas(cadent, cadsal);
 int toma_campo(char campo[], char buffreg[], short pos_bus, short long_reg);
 
+/*
+    El programa principal abre un archivo de registros secuenciales y permite
+    al usuario agregar registros al final del archivo o extraer registros para
+    modificarlos.
+*/
 int main(){
     int i, menu_elec, nrr;
     int byte_pos;

@@ -2,6 +2,11 @@
 #define EXITO 1
 #define FRACASO 0
 
+/*
+    El programa principal abre un archivo de registros secuenciales y permite
+    al usuario buscar un registro por medio de una llave compuesta por el
+    apellido y el nombre.
+*/
 main() {
     int fd, long_reg, pos_bus;
     int encontro;

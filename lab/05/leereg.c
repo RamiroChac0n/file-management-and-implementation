@@ -1,5 +1,9 @@
 #include "arches.h"
 
+/*
+    El programa principal crea un archivo de registros secuenciales y permite
+    al usuario agregar registros al final del archivo.
+*/
 main(){
     int fd, cont_reg, cont_campos;
     int pos_bus, long_reg;
