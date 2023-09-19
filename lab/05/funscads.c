@@ -1,4 +1,4 @@
-void cadespace(cad)
+int cadespac(cad)
     char cad[];
 {
     int i;
