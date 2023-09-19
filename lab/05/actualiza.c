@@ -1,4 +1,6 @@
 #include "arches.h"
+#include <stdio.h>
+#include <string.h>
 #define LONG_REG 64
 #define campo_a_buffreg(br, cad) strcat(br, cad); strcat(br, DELIM_CAD);
 
@@ -8,7 +10,7 @@ static char *solicitud[] = {"   Apellido: ",
                             "     Ciudad: ",
                             "     Estado: ",
                             "Cod. Post.: ",
-                            " "
+                            "\0"
                            };
 static int fd;
 static struct{
@@ -16,7 +18,16 @@ static struct{
     char    relleno[60]; 
 } encabezado;
 
-main(){
+static int menu();
+static void pide_info(char buffreg[]);
+static int pide_nrr();
+static void lee_y_muestra();
+static int cambio();
+
+void mayusculas(cadent, cadsal);
+int toma_campo(char campo[], char buffreg[], short pos_bus, short long_reg);
+
+int main(){
     int i, menu_elec, nrr;
     int byte_pos;
     char nomarch[15];
@@ -24,7 +35,7 @@ main(){
     char buffreg[TAM_MAX_REG +1];
 
     printf("Proporcione el nombre del archivo que quiere crear: ");
-    gets(encabezado.relleno);
+    fgets(nomarch, 15, stdin);
     if((fd = open(nomarch, LECTESCRIT)) < 0){
         fd = creat(nomarch, PMODE);
         encabezado.cont_reg = 0;
@@ -32,7 +43,7 @@ main(){
     }else{
         read(fd, &encabezado, sizeof(encabezado));
     }
-    while((menu_elec == menu()) < 3){
+    while((menu_elec = menu()) < 3){
         switch(menu_elec){
             case 1:
                 printf("Proporcione la información del registro nuevo\n\n");
@@ -67,9 +78,10 @@ main(){
     lseek(fd, 0L, 0);
     write(fd, &encabezado, sizeof(encabezado));
     close(fd);
+    return(0);
 }
 
-static menu(){
+static int menu(){
     int elección;
     char respuesta[10];
 
@@ -79,27 +91,29 @@ static menu(){
     printf("\n2. Extraer un registro para actualizarlo\n");
     printf("\n3. Salir del programa\n\n");
     printf("Proporcione el número de su elección: ");
-    gets(respuesta);
+    fgets(respuesta, 10, stdin);
+    /*gets(respuesta);*/
     elección = atoi(respuesta);
     return(elección);
 }
 
-static pide_info(buffreg)
+static void pide_info(buffreg)
     char buffreg[];
 {
     int con_campos, i;
     char respuesta[50];
 
-    for(i = 0; i < LONG_REG; buffreg[i++] == '\0')
+    for(i = 0; i < TAM_MAX_REG; i++)
+        buffreg[i] = '\0';
 
     for(i = 0; *solicitud[i] != '\0'; i++){
         printf("%s", solicitud[i]);
-        gets(respuesta);
+        fgets(respuesta, 50, stdin);
         campo_a_buffreg(buffreg, respuesta);
     }
 }
 
-static pide_nrr(){
+static int pide_nrr(){
     int nrr;
     char respuesta[10];
 
@@ -107,10 +121,10 @@ static pide_nrr(){
     printf("\tque desee actualizar: ");
     gets(respuesta);
     nrr = atoi(respuesta);
-    return(respuesta);
+    return(nrr);
 }
 
-static lee_y_muestra(){
+static void lee_y_muestra(){
     char buffreg[TAM_MAX_REG +1], campo[TAM_MAX_REG +1];
     int pos_bus, long_datos;
 
@@ -127,7 +141,7 @@ static lee_y_muestra(){
         printf("\t%s\n", campo);
 }
 
-static cambio(){
+static int cambio(){
     char respuesta[10];
 
     printf("\n\nDesea modificar este registro?\n");
@@ -135,4 +149,31 @@ static cambio(){
     gets(respuesta);
     mayusculas(respuesta,respuesta);
     return((respuesta[0] == 'S') ? 1 : 0);
+}
+
+void mayusculas(cadent, cadsal)
+    char cadent[], cadsal[];
+{
+    while (*cadsal++ = (*cadent >= 'a' && *cadent <= 'z') ? *cadent & 0x5F : *cadent)
+        cadent++;
+}
+
+int toma_campo(campo, buffreg, pos_bus, long_reg)
+    char campo[], buffreg[];
+    short pos_bus, long_reg;
+{
+    short cpos = 0;     /*posicion en el arreglo "campo" */
+
+    if (pos_bus == long_reg) /* si no hay mas campos que leer */
+        return(0);              /*devuelve pos_bus de 0 */
+
+    while( pos_bus < long_reg && (campo[cpos++] = buffreg[pos_bus++]) != DELIM_CAR);
+
+    if (campo[cpos -1] == DELIM_CAR)
+        campo[-cpos] = '\0';
+    else
+        campo[cpos] = '\0';
+
+    return (pos_bus);
+
 }
