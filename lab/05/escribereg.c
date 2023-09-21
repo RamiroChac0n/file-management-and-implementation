@@ -1,4 +1,7 @@
 #include "arches.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define campo_a_buffreg(br, cad) strcat(br, cad); strcat(br, DELIM_CAD);
 
 char buffreg[TAM_MAX_REG +1];
@@ -16,7 +19,7 @@ char *solicitud[] = {
     El programa principal crea un archivo de registros secuenciales y permite
     al usuario agregar registros al final del archivo.
 */
-main(){
+int main(){
     char respuesta[50];
     char nomarch[15];
     int fd, i;
@@ -46,4 +49,5 @@ main(){
         gets(respuesta);
     }
     close(fd);
+    return(0);
 }
