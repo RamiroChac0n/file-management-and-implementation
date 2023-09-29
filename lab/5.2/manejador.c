@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "ab.h"
 #include "arches.h"
+#define READWRITE 2
+#define SI 1
+#define NO 0
 
 abreab();
 tomaraiz();
