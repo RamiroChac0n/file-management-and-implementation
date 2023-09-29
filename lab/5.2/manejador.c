@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "ab.h"
 #include "arches.h"
 #define READWRITE 2
 #define SI 1
 #define NO 0
 
-short crea_raiz(char llave, short izq, short der);
 int abreab();
 void cierraab();
 short tomaraiz();
@@ -13,8 +13,9 @@ void colocaraiz(short raiz);
 short crea_arbol();
 short tomapag();
 int leeab(short nrr, PAGINAAB *apunt_pagina);
-int escribreab(short nrr, PAGINAAB *apunt_pagina);
+int escribeab(short nrr, PAGINAAB *apunt_pagina);
 void iniciapag(PAGINAAB *a_pagina);
+short crea_raiz(char llave, short izq, short der);
 int busca_nodo(char llave, PAGINAAB *a_pagina, short *pos);
 void ins_en_pag(char llave, short hijo_d, PAGINAAB *a_pagina);
 void divide(char llave, short hijo_d, PAGINAAB *a_pagant,char *llave_promo,short *hijo_d_promo,PAGINAAB *a_pagnue);
@@ -40,24 +41,6 @@ int main(){
     }
     cierraab();             /* Cierra arbolb.dat */
     return 0;
-}
-
-
-// CÓDIGO DE utilab.c
-short crea_raiz(llave, izq, der)
-char llave;
-short izq, der;
-{
-    PAGINAAB pagina;
-    short nrr;
-    inciapag(&pagina);
-    pagina.llave[0] = llave;
-    pagina.hijo[0] = izq;
-    pagina.hijo[1] = der;
-    pagina.contllave = 1;
-    escribeab(nrr, &pagina);
-    colocaraiz(nrr);
-    return (nrr);
 }
 
 // CÓDIGO DE abes.c
@@ -117,7 +100,7 @@ PAGINAAB *apunt_pagina;
     return (read(daab, apunt_pagina, TAMPAGINA));
 }
 
-int escribreab (nrr, apunt_pagina)
+int escribeab (nrr, apunt_pagina)
 short nrr;
 PAGINAAB *apunt_pagina;
 {
@@ -139,6 +122,24 @@ PAGINAAB *a_pagina; /* Apuntador a una página */
     a_pagina->hijo[MAXLLAVES] = NULO;
 }
 
+// CÓDIGO DE utilab.c
+short crea_raiz(llave, izq, der)
+char llave;
+short izq, der;
+{
+    PAGINAAB pagina;
+    short nrr;
+    iniciapag(&pagina);
+    pagina.llave[0] = llave;
+    pagina.hijo[0] = izq;
+    pagina.hijo[1] = der;
+    pagina.contllave = 1;
+    escribeab(nrr, &pagina);
+    colocaraiz(nrr);
+    return (nrr);
+}
+
+//CÓDIGO DE utilab.c
 int busca_nodo (llave, a_pagina, pos)
 char llave;
 PAGINAAB *a_pagina;
