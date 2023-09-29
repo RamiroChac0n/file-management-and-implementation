@@ -5,11 +5,7 @@
 #define SI 1
 #define NO 0
 
-abreab();
-tomaraiz();
-crea_arbol();
-inserta();
-crea_raiz();
+
 
 int main(){
     int promovido;      /* booleano: indica si hay una promocion */
