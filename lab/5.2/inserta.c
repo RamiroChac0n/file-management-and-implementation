@@ -5,7 +5,7 @@
 #define SI 1
 #define NO 0
 
-inserta (nrr, llave, hijo_d_promo, llave_promo)
+int inserta (nrr, llave, hijo_d_promo, llave_promo)
 short nrr,  /* NRR de pagina en donde se va a insertar */
      *hijo_d_promo; /* Hijo promovido al siguiente nivel */
 char llave, /* Llave por insertar aqui o más abajo */
