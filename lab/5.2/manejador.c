@@ -6,7 +6,6 @@
 #define NO 0
 
 short crea_raiz(char llave, short izq, short der);
-int inserta(short nrr, char llave, short *hijo_d_promo, char *llave_promo);
 int abreab();
 void cierraab();
 short tomaraiz();
@@ -18,7 +17,8 @@ int escribreab(short nrr, PAGINAAB *apunt_pagina);
 void iniciapag(PAGINAAB *a_pagina);
 int busca_nodo(char llave, PAGINAAB *a_pagina, short *pos);
 void ins_en_pag(char llave, short hijo_d, PAGINAAB *a_pagina);
-void divide(char llave, short hijo_d, PAGINAAB *a_pagant, char llave_promo, short hijo_d_promo, PAGINAAB *a_pagnue);
+void divide(char llave, short hijo_d, PAGINAAB *a_pagant,char *llave_promo,short *hijo_d_promo,PAGINAAB *a_pagnue);
+int inserta(short nrr, char llave, short *hijo_d_promo, char *llave_promo);
 
 
 int main(){
@@ -169,15 +169,7 @@ PAGINAAB *a_pagina;
     a_pagina->hijo[i+1] = hijo_d;
 }
 
-void divide(llave, hijo_d, a_pagant, llave_promo, hijo_d_promo, a_pagnue)
-char llave, /* Llave por insertar */
-    *llave_promo;   /* Llave a promover hacía arriba desde aquí */
-short hijo_d,   /* NRR del hijo por insertar */
-    *hijo_d_promo;  /* NRR a promover hacía arriba desde aquí */
-
-PAGINAAB    *a_pagant,  /* Apuntador a la página antecesora */
-            *a_pagnue;  /* Apuntador a la página nueva */
-{
+void divide(char llave, short hijo_d, PAGINAAB *a_pagant,char *llave_promo,short *hijo_d_promo,PAGINAAB *a_pagnue){
     int i;
     short mitad;    /* Indica donde debe ocurrir la división */
     char llavesaux[MAXLLAVES+1];    /* Almacena temporalmente las llaves */
