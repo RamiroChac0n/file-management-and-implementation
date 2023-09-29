@@ -4,6 +4,7 @@
 #include "ab.h"
 #include <stdio.h>
 #include "arches.h"
+#define READWRITE 2
 
 int daab;
 
