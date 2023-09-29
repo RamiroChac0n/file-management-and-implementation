@@ -31,8 +31,8 @@ char llave, /* Llave por insertar aqui o más abajo */
             return (0);
         }
 
-        promocion = inserta (pagina.hijo[poss], llave, &nrr_p_a, &llave_p_a);
-        if (!promocion)
+        promovido = inserta (pagina.hijo[poss], llave, &nrr_p_a, &llave_p_a);
+        if (!promovido)
             return (NO);    /* No hay promoción */
         if (pagina.contllave < MAXLLAVES) {
 
