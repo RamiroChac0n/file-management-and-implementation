@@ -2,6 +2,8 @@
 // Created by Bezaleel on 27/09/23.
 //
 #include <ab.h>
+#define SI 1
+#define NO 0
 
 inserta (nrr, llave, hijo_d_promo, llave_promo)
 short nrr,  /* NRR de pagina en donde se va a insertar */
