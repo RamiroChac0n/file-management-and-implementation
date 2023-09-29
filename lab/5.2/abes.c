@@ -8,12 +8,12 @@
 
 int daab;
 
-abreab(){
+int abreab(){
     daab = open ("arbolb.dat", READWRITE);
     return (daab > 0);
 }
 
-cierraab(){
+void cierraab(){
     close (daab);
 }
 
@@ -28,7 +28,7 @@ short tomaraiz (){
     return (raiz);
 }
 
-colocaraiz (raiz)
+void colocaraiz (raiz)
 short raiz;
 {
     long lseek ();
@@ -52,7 +52,7 @@ short tomapag()
     return ((short) dir/ TAMPAGINA);
 }
 
-leeab(nrr, apunt_pagina)
+int leeab(nrr, apunt_pagina)
 short nrr;
 PAGINAAB *apunt_pagina;
 {
@@ -62,7 +62,7 @@ PAGINAAB *apunt_pagina;
     return (read(daab, apunt_pagina, TAMPAGINA));
 }
 
-escribreab (nrr, apunt_pagina)
+int escribreab (nrr, apunt_pagina)
 short nrr;
 PAGINAAB *apunt_pagina;
 {

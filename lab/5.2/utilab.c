@@ -5,7 +5,7 @@
 #define SI 1
 #define NO 0
 
-crea_raiz(llave, izq, der)
+short crea_raiz(llave, izq, der)
 char llave;
 short izq, der;
 {
@@ -21,7 +21,7 @@ short izq, der;
     return (nrr);
 }
 
-iniciapag(a_pagina)
+void iniciapag(a_pagina)
 PAGINAAB *a_pagina; /* Apuntador a una página */
 {
     int j;
@@ -32,7 +32,7 @@ PAGINAAB *a_pagina; /* Apuntador a una página */
     a_pagina->hijo[MAXLLAVES] = NULO;
 }
 
-busca_nodo (llave, a_pagina, pos)
+int busca_nodo (llave, a_pagina, pos)
 char llave;
 PAGINAAB *a_pagina;
 short *pos; /* Posición en donde la llave está o debe insertarse */
@@ -47,7 +47,7 @@ short *pos; /* Posición en donde la llave está o debe insertarse */
 
 }
 
-ins_en_pag(llave, hijo_d, a_pagina)
+void ins_en_pag(llave, hijo_d, a_pagina)
 char llave;
 short hijo_d;
 PAGINAAB *a_pagina;
@@ -62,7 +62,7 @@ PAGINAAB *a_pagina;
     a_pagina->hijo[i+1] = hijo_d;
 }
 
-divide (llave, hijo_d, a_pagant, llave_promo, hijo_d_promo, a_pagnue)
+void divide (llave, hijo_d, a_pagant, llave_promo, hijo_d_promo, a_pagnue)
 char llave, /* Llave por insertar */
     *llave_promo;   /* Llave a promover hacía arriba desde aquí */
 short hijo_d,   /* NRR del hijo por insertar */
