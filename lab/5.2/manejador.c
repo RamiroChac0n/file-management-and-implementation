@@ -25,4 +25,5 @@ int main(){
             raiz = crea_raiz(llave_promo, raiz, nrr_promo);
     }
     cierraab();             /* Cierra arbolb.dat */
+    return 0;
 }
