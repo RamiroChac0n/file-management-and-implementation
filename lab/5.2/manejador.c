@@ -5,6 +5,20 @@
 #define SI 1
 #define NO 0
 
+short crea_raiz(char llave, short izq, short der);
+int inserta(short nrr, char llave, short *hijo_d_promo, char *llave_promo);
+int abreab();
+void cierraab();
+short tomaraiz();
+void colocaraiz(short raiz);
+short crea_arbol();
+short tomapag();
+int leeab(short nrr, PAGINAAB *apunt_pagina);
+int escribreab(short nrr, PAGINAAB *apunt_pagina);
+void iniciapag(PAGINAAB *a_pagina);
+int busca_nodo(char llave, PAGINAAB *a_pagina, short *pos);
+void ins_en_pag(char llave, short hijo_d, PAGINAAB *a_pagina);
+void divide(char llave, short hijo_d, PAGINAAB *a_pagant, char llave_promo, short hijo_d_promo, PAGINAAB *a_pagnue);
 
 
 int main(){
@@ -155,7 +169,7 @@ PAGINAAB *a_pagina;
     a_pagina->hijo[i+1] = hijo_d;
 }
 
-void divide (llave, hijo_d, a_pagant, llave_promo, hijo_d_promo, a_pagnue)
+void divide(llave, hijo_d, a_pagant, llave_promo, hijo_d_promo, a_pagnue)
 char llave, /* Llave por insertar */
     *llave_promo;   /* Llave a promover hacía arriba desde aquí */
 short hijo_d,   /* NRR del hijo por insertar */
