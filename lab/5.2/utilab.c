@@ -2,6 +2,8 @@
 // Created by Bezaleel on 27/09/23.
 //
 #include "ab.h"
+#define SI 1
+#define NO 0
 
 crea_raiz(llave, izq, der)
 char llave;
