@@ -3,6 +3,7 @@
 #include <string.h>
 #include "product.h"
 #include "id_generator.h"
+#include "hash_table.h"
 
 int main() {
     Product *product = malloc(sizeof(Product)); // Reservar memoria para el producto
