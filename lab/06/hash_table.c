@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SIZE 29
+#define SIZE_TABLE 29
 
 typedef struct {
     char* key;
     int value;
 } Node;
 
-Node* hashTable[SIZE];
+Node* hashTable[SIZE_TABLE];
 
 void init_hash_table() {
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE_TABLE; i++) {
         hashTable[i] = NULL;
     }
 }
@@ -22,14 +22,14 @@ int hash_function(char* key) {
     for (int i = 0; key[i] != '\0'; i++) {
         sum += key[i];
     }
-    return sum % SIZE;
+    return sum % SIZE_TABLE;
 }
 
 void insert(char* key, int value) {
     int index = hash_function(key);
 
     while (hashTable[index] != NULL) {
-        index = (index + 1) % SIZE; // Saturación progresiva: buscar la siguiente posición disponible
+        index = (index + 1) % SIZE_TABLE; // Saturación progresiva: buscar la siguiente posición disponible
     }
 
     Node* newNode = (Node*)malloc(sizeof(Node));
@@ -45,7 +45,7 @@ int search(char* key) {
         if (strcmp(hashTable[index]->key, key) == 0) {
             return hashTable[index]->value;
         }
-        index = (index + 1) % SIZE; // Saturación progresiva: buscar la siguiente posición en caso de colisión
+        index = (index + 1) % SIZE_TABLE; // Saturación progresiva: buscar la siguiente posición en caso de colisión
     }
 
     return -1; // Valor no encontrado

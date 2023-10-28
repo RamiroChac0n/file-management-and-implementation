@@ -6,13 +6,37 @@
 #include "hash_table.h"
 
 int main() {
-    Product *product = malloc(sizeof(Product)); // Reservar memoria para el producto
-    strcpy(product->id, id_generator()); // Copiar el id generado a la estructura
-    strcpy(product->name, "Banana"); // Asignar el nomre del product
-    product->price = 10.0; // Asignar el precio del producto
-    printf("ID: %s\n", product->id); // Imprimir el id del producto
-    printf("NAME: %s\n", product->name); // Imprimir el nombre del producto
-    printf("PRICE: %.2f\n", product->price); // Imprimir el precio del product
-    free(product); // Liberar la memoria reservada para el producto
+    int eleccion = 0;
+    do
+    {
+        printf("1. Insertar producto\n");
+        printf("2. Buscar producto\n");
+        printf("3. Mostrar productos\n");
+        printf("0. Salir\n");
+        printf("Elija una opción: ");
+        scanf("%d", &eleccion);
+        printf("\n");
+
+        switch (eleccion)
+        {
+        case 1:
+            insert_product();
+            break;
+        case 2:
+            search_product();
+            break;
+        case 3:
+            show_products();
+            break;
+        case 0:
+            printf("Saliendo...\n");
+            break;
+        default:
+            printf("Opción no válida\n");
+            break;
+        }
+        printf("\n");
+    } while (eleccion != 0);
+    
     return 0;
 }
