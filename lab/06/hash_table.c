@@ -40,6 +40,7 @@ void insert(Product* product) {
     Product* newProduct = (Product*)malloc(sizeof(Product));
     newProduct->id = strdup(product->id);
     newProduct->name = strdup(product->name);
+    newProduct->price = product->price;
     // Copiar otros campos según sea necesario...
 
     newNode->product = newProduct;
@@ -47,25 +48,27 @@ void insert(Product* product) {
 }
 
 
-char* search(char* key) {
-    int index = hash_function(key);
+Product* search(char* key) {
+    int index = hash_function(key); // Calcular el índice basado en la llave
 
+    // Realizar búsqueda en la tabla hash
     while (hashTable[index] != NULL) {
         if (strcmp(hashTable[index]->key, key) == 0) {
-            return hashTable[index]->product->name;
+            return hashTable[index]->product; // Se encontró la clave, devolver el producto asociado
         }
-        index = (index + 1) % SIZE_TABLE; // Saturación progresiva: buscar la siguiente posición en caso de colisión
+        index = (index + 1) % SIZE_TABLE; // Avanzar al siguiente índice (saturación progresiva)
     }
 
-    return NULL; // Valor no encontrado
+    return NULL; // Si no se encuentra la clave en la tabla
 }
+
 
 void display_hash_table() {
     system("clear");
     printf("Tabla Hash:\n");
     for (int i = 0; i < SIZE_TABLE; i++) {
         if (hashTable[i] != NULL) {
-            printf(" %02d: Key: %s Producto: %s\n", i, hashTable[i]->product->id, hashTable[i]->product->name);
+            printf(" %02d: Key: %s\n", i, hashTable[i]->product->id);
         } else {
             printf(" %02d: -----\n", i);
         }

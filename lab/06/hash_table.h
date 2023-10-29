@@ -3,7 +3,7 @@
 
 void init_hash_table();
 void insert(Product* product);
-int search(char* key);
+Product* search(char* key);
 
 void display_hash_table();
 

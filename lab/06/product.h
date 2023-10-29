@@ -4,7 +4,7 @@
 typedef struct {
     char* id;
     char* name;
-    double price;
+    float price;
 } Product;
 
 #endif // PRODUCT_H

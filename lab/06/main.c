@@ -8,13 +8,13 @@
 void info_product(){
     Product* product = (Product*) malloc(sizeof(Product));
     char name[23];
-    int price;
+    float price;
     char* id = id_generator();
     printf("ID: %s\n", id);
     printf("Nombre del producto: ");
     scanf("%s", name);
     printf("Precio del producto: ");
-    scanf("%d", &price);
+    scanf("%f", &price);
 
     product->id = id;
     product->name = name;
@@ -22,6 +22,24 @@ void info_product(){
 
     insert(product);
     free(product);
+}
+
+void search_product() {
+    char* id;
+    printf("ID del producto: ");
+    scanf("%s", id);
+    Product* product = search(id);
+
+    if (product != NULL) {
+        system("clear");
+        printf("==================================================\n");
+        printf("ID: %s\n", product->id);
+        printf("Nombre del producto: %s\n", product->name);
+        printf("Precio del producto: %.2f\n", product->price);
+        printf("==================================================\n");
+    } else {
+        printf("Producto no encontrado\n");
+    }
 }
 
 int main() {
@@ -43,7 +61,7 @@ int main() {
             info_product();
             break;
         case 2:
-            //search_product();
+            search_product();
             break;
         case 3:
             display_hash_table();
