@@ -2,7 +2,9 @@
 #define HASH_TABLE
 
 void init_hash_table();
-int insert(char* key, int value);
+void insert(Product* product);
 int search(char* key);
 
-#endif  HASH_TABLE
+void display_hash_table();
+
+#endif  //  HASH_TABLE

@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "product.h"
 
 #define SIZE_TABLE 29
 
 typedef struct {
     char* key;
-    int value;
+    Product* product;
 } Node;
 
 Node* hashTable[SIZE_TABLE];
@@ -25,31 +26,52 @@ int hash_function(char* key) {
     return sum % SIZE_TABLE;
 }
 
-void insert(char* key, int value) {
-    int index = hash_function(key);
+void insert(Product* product) {
+    int index = hash_function(product->id);
 
     while (hashTable[index] != NULL) {
         index = (index + 1) % SIZE_TABLE; // Saturación progresiva: buscar la siguiente posición disponible
     }
 
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->key = strdup(key);
-    newNode->value = value;
+    newNode->key = strdup(product->id);
+
+    // Crear una nueva instancia de Product y copiar el contenido del producto proporcionado
+    Product* newProduct = (Product*)malloc(sizeof(Product));
+    newProduct->id = strdup(product->id);
+    newProduct->name = strdup(product->name);
+    // Copiar otros campos según sea necesario...
+
+    newNode->product = newProduct;
     hashTable[index] = newNode;
 }
 
-int search(char* key) {
+
+char* search(char* key) {
     int index = hash_function(key);
 
     while (hashTable[index] != NULL) {
         if (strcmp(hashTable[index]->key, key) == 0) {
-            return hashTable[index]->value;
+            return hashTable[index]->product->name;
         }
         index = (index + 1) % SIZE_TABLE; // Saturación progresiva: buscar la siguiente posición en caso de colisión
     }
 
-    return -1; // Valor no encontrado
+    return NULL; // Valor no encontrado
 }
+
+void display_hash_table() {
+    system("clear");
+    printf("Tabla Hash:\n");
+    for (int i = 0; i < SIZE_TABLE; i++) {
+        if (hashTable[i] != NULL) {
+            printf(" %02d: Key: %s Producto: %s\n", i, hashTable[i]->product->id, hashTable[i]->product->name);
+        } else {
+            printf(" %02d: -----\n", i);
+        }
+    }
+}
+
 
 /*int main() {
     init_hash_table();

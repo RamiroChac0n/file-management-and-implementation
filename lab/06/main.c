@@ -5,7 +5,27 @@
 #include "id_generator.h"
 #include "hash_table.h"
 
+void info_product(){
+    Product* product = (Product*) malloc(sizeof(Product));
+    char name[23];
+    int price;
+    char* id = id_generator();
+    printf("ID: %s\n", id);
+    printf("Nombre del producto: ");
+    scanf("%s", name);
+    printf("Precio del producto: ");
+    scanf("%d", &price);
+
+    product->id = id;
+    product->name = name;
+    product->price = price;
+
+    insert(product);
+    free(product);
+}
+
 int main() {
+    system("clear");
     int eleccion = 0;
     do
     {
@@ -20,13 +40,13 @@ int main() {
         switch (eleccion)
         {
         case 1:
-            insert_product();
+            info_product();
             break;
         case 2:
-            search_product();
+            //search_product();
             break;
         case 3:
-            show_products();
+            display_hash_table();
             break;
         case 0:
             printf("Saliendo...\n");

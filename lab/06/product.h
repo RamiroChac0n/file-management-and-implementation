@@ -2,8 +2,8 @@
 #define PRODUCT_H
 
 typedef struct {
-    char id[7];
-    char name[23];
+    char* id;
+    char* name;
     double price;
 } Product;
 
