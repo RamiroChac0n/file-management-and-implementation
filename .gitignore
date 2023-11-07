@@ -56,5 +56,6 @@ dkms.conf
 *.zip
 .vscode
 *.xml
+*.exe
 
 .idea/
