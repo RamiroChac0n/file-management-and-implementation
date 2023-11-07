@@ -1,6 +1,13 @@
 #include "arches.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-main(){
+int leecampo();
+/*
+    El programa principal crea un archivo de registros secuenciales y permite
+    al usuario agregar registros al final del archivo.
+*/
+int main(){
     int fd, n;
     char cad[30];
     char nomarch[15];
@@ -18,9 +25,14 @@ main(){
         printf("\tCampo # %3d: %s\n", ++cont_campos, cad);
 
     close(fd);
+    return(0);
 }
 
-leecampo(fd, cad)
+/*
+    La función leecampo() lee un campo del archivo "fd" y lo coloca en la cadena
+    "cad". La función devuelve la longitud del campo leído.
+*/
+int leecampo(fd, cad)
     int fd;
     char cad[];
 {
