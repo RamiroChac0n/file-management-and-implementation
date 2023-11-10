@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <mysql/mysql.h>
 #include "conection_data.h"
 
@@ -7,13 +8,20 @@ void ejecutar_consulta(MYSQL *conexion, char *consulta);
 
 int main(){
     int error;
-    char *consulta;
+    char consulta[200], id[100];
     MYSQL *conexion;
 
     error = conectar(&conexion);
 
     if(!error){
-        consulta = "SELECT * FROM user";
+        printf("Ingresar nombre del usuario: ");
+        scanf("%s", id);
+        sprintf(consulta, "SELECT * FROM user WHERE id = %s", id);
+        /*
+        strcat(consulta, "SELECT * FROM user WHERE first_name LIKE '%");
+        strcat(consulta, id);
+        strcat(consulta, "%'");
+        */
         ejecutar_consulta(conexion, consulta);
 
         mysql_close(conexion);
