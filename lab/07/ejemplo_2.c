@@ -14,7 +14,7 @@ int main(){
     error = conectar(&conexion);
 
     if(!error){
-        printf("Ingresar nombre del usuario: ");
+        printf("Ingresar id del usuario: ");
         scanf("%s", id);
         sprintf(consulta, "SELECT * FROM user WHERE id = %s", id);
         /*
