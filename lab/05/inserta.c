@@ -1,7 +1,7 @@
 //
 // Created by Bezaleel on 27/09/23.
 //
-#include <ab.h>
+#include "ab.h"
 #define SI 1
 #define NO 0
 
@@ -33,7 +33,7 @@ char llave, /* Llave por insertar aqui o más abajo */
             return (0);
         }
 
-        promovido = inserta (pagina.hijo[poss], llave, &nrr_p_a, &llave_p_a);
+        int promovido = inserta (pagina.hijo[poss], llave, &nrr_p_a, &llave_p_a);
         if (!promovido)
             return (NO);    /* No hay promoción */
         if (pagina.contllave < MAXLLAVES) {
